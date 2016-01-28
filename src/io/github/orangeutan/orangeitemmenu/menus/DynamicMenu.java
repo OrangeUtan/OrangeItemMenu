@@ -120,7 +120,6 @@ public abstract class DynamicMenu implements IItemMenu {
 
     @Override
     public void resume(Player player, IItemMenu oldMenu) {
-        mParentMenu = oldMenu;
         open(player, oldMenu);
     }
 

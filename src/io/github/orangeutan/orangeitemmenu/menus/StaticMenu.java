@@ -108,7 +108,6 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public void resume(Player player, IItemMenu oldMenu) {
-        mParentMenu = oldMenu;
         open(player, oldMenu);
     }
 
