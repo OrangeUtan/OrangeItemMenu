@@ -30,13 +30,15 @@ public abstract class DynamicMenu implements IItemMenu {
     protected String mName;
     protected ArrayList<IMenuItem> mItems;
     protected IItemMenu mParentMenu;
+    protected Player mPlayer;
 
-    public DynamicMenu(Plugin plugin, Size size, String name, List<IMenuItem> items, IItemMenu parentMenu) {
+    public DynamicMenu(Plugin plugin, Player player, Size size, String name, List<IMenuItem> items, IItemMenu parentMenu) {
         mPlugin = plugin;
         mSize = size;
         mName = name;
         mItems = new ArrayList<>(size.getSlots());
         mParentMenu = parentMenu;
+        mPlayer = player;
 
         if (items != null) mItems.addAll(items);
         fillEmptySlots(DyeColor.GRAY);
@@ -232,5 +234,13 @@ public abstract class DynamicMenu implements IItemMenu {
     @Override
     public IItemMenu getParent() {
         return mParentMenu;
+    }
+
+    public Player getPlayer() {
+        return mPlayer;
+    }
+
+    public void setPlayer(Player player) {
+        mPlayer = player;
     }
 }
