@@ -31,7 +31,7 @@ public interface IItemMenu {
      * @param player The {@link Player} for which to open the Inventory GUI Menu
      * @param previousMenu The previous {@link IItemMenu} opening this Inventory GUI Menu
      */
-    void open(Player player, IItemMenu previousMenu);
+    void open(IItemMenu previousMenu);
 
     /**
      * Close this Inventory GUI Menu
@@ -82,6 +82,10 @@ public interface IItemMenu {
     Plugin getPlugin();
 
     IItemMenu getParent();
+
+    Player getPlayer();
+
+    void setPlayer(Player player);
 
     enum Size {
         ONE_LINE(9),

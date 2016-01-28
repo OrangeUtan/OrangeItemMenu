@@ -47,7 +47,7 @@ public class ConfigurableItem implements IMenuItem {
                 isEmpty = true;
                 break;
         }
-        menu.update(event.getPlayer());
+        menu.update(getMenu().getPlayer());
     }
 
     @Override

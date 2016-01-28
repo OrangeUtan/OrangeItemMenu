@@ -39,7 +39,7 @@ public class NavigateItem extends StaticItem {
         super.onItemClick(event);
 
         if (mDestination == null) {
-            getMenu().navigateBack(event.getPlayer());
+            getMenu().navigateBack(getMenu().getPlayer());
         } else {
             mDestination.open(mDestination);
         }

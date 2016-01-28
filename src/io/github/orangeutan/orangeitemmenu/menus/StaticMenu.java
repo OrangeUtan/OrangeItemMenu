@@ -25,17 +25,18 @@ public abstract class StaticMenu implements IItemMenu {
     protected Plugin mPlugin;
     protected Size mSize;
     protected String mName;
-    protected ArrayList<IMenuItem> mItems;
+    protected ArrayList<IMenuItem> mItems = new ArrayList<>();
     protected IItemMenu mParentMenu;
+    protected Player mPlayer;
 
-    public StaticMenu(Plugin plugin, Size size, String name, IMenuItem[] items, IItemMenu parentMenu) {
+    public StaticMenu(Plugin plugin, Player player, Size size, String name, IItemMenu parentMenu) {
         mPlugin = plugin;
         mSize = size;
         mName = name;
         mItems = new ArrayList<>(size.getSlots());
         mParentMenu = parentMenu;
+        mPlayer = player;
 
-        mItems.addAll(Arrays.asList(items));
         fillEmptySlots(DyeColor.GRAY);
     }
 
@@ -56,11 +57,11 @@ public abstract class StaticMenu implements IItemMenu {
     }
 
     @Override
-    public void open(Player player, IItemMenu previousMenu) {
-        Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, mSize.getSlots())), mSize.getSlots(), mName);
-        applyOnInventory(inventory, player);
+    public void open(IItemMenu previousMenu) {
+        Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(mPlayer, mSize.getSlots())), mSize.getSlots(), mName);
+        applyOnInventory(inventory, mPlayer);
 
-        player.openInventory(inventory);
+        mPlayer.openInventory(inventory);
     }
 
     @Override
@@ -108,7 +109,7 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public void resume(Player player, IItemMenu oldMenu) {
-        open(player, oldMenu);
+        open(oldMenu);
     }
 
     @Override
@@ -116,7 +117,7 @@ public abstract class StaticMenu implements IItemMenu {
         for (int i = 0; i < mItems.size(); i++) {
             if (i >= mItems.size()) break;
             if (mItems.get(i) != null && inventory.getItem(i) == null) {
-                inventory.setItem(i, mItems.get(i).getIcon(player));
+                inventory.setItem(i, mItems.get(i).getIcon());
             }
         }
     }
@@ -137,26 +138,37 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public boolean addItem(IMenuItem newItem) {
+        for (int i=0; i<mItems.size(); i++) {
+            if (mItems.get(i) == null || mItems.get(i).canBeReplaced()) {
+                mItems.set(i, newItem);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean removeItem(int index) {
-        return false;
+        if (index >= mItems.size()) return false;
+        mItems.set(index, new EmptySlotItem(this, DyeColor.GRAY));
+        return true;
     }
 
     @Override
     public boolean removeItem(IMenuItem item) {
-        return false;
+        return removeItem(mItems.indexOf(item));
     }
 
     @Override
     public void replaceItem(int index, IMenuItem replaceWith) {
+        setItem(index, replaceWith);
     }
 
     @Override
     public IItemMenu setItem(int index, IMenuItem item) {
-        return null;
+        if (index >= mItems.size()) return null;
+        mItems.set(index, item);
+        return this;
     }
 
     @Override
@@ -167,10 +179,12 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public void setName(String name) {
+        mName = name;
     }
 
     @Override
     public void setSize(Size size) {
+        mSize = size;
     }
 
     @Override
@@ -201,5 +215,15 @@ public abstract class StaticMenu implements IItemMenu {
     @Override
     public IItemMenu getParent() {
         return mParentMenu;
+    }
+
+    @Override
+    public Player getPlayer() {
+        return mPlayer;
+    }
+
+    @Override
+    public void setPlayer(Player player) {
+        mPlayer = player;
     }
 }
