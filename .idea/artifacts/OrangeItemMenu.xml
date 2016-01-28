@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OrangeItemMenu">
+    <output-path>$PROJECT_DIR$/../../_server/Debug_Spigot_Plugin_Test_Server/plugins/lib</output-path>
+    <root id="archive" name="OrangeItemMenu.jar">
+      <element id="module-output" name="OrangeItemMenu" />
+    </root>
+  </artifact>
+</component>
