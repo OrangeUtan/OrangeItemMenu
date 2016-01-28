@@ -114,6 +114,7 @@ public abstract class StaticMenu implements IItemMenu {
     @Override
     public void applyOnInventory(Inventory inventory, Player player) {
         for (int i = 0; i < mItems.size(); i++) {
+            if (i >= mItems.size()) break;
             if (mItems.get(i) != null && inventory.getItem(i) == null) {
                 inventory.setItem(i, mItems.get(i).getIcon(player));
             }
@@ -197,4 +198,8 @@ public abstract class StaticMenu implements IItemMenu {
         return mPlugin;
     }
 
+    @Override
+    public IItemMenu getParent() {
+        return mParentMenu;
+    }
 }
