@@ -79,7 +79,9 @@ public interface IItemMenu {
 
     int getIndex(IMenuItem item);
 
-    public Plugin getPlugin();
+    Plugin getPlugin();
+
+    IItemMenu getParent();
 
     enum Size {
         ONE_LINE(9),

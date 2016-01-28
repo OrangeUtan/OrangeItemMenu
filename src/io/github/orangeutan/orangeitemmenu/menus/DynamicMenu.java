@@ -120,12 +120,17 @@ public abstract class DynamicMenu implements IItemMenu {
 
     @Override
     public void resume(Player player, IItemMenu oldMenu) {
-        open(player, oldMenu);
+        Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(player, mSize.getSlots())), mSize.getSlots(), mName);
+        clear(player);
+        applyOnInventory(inventory, player);
+
+        player.openInventory(inventory);
     }
 
     @Override
     public void applyOnInventory(Inventory inventory, Player player) {
-        for (int i = 0; i < mItems.size(); i++) {
+        for (int i = 0; i < mSize.getSlots(); i++) {
+            if (i >= mItems.size()) break;
             if (mItems.get(i) != null && inventory.getItem(i) == null) {
                 inventory.setItem(i, mItems.get(i).getIcon(player));
             }
@@ -222,5 +227,10 @@ public abstract class DynamicMenu implements IItemMenu {
     @Override
     public Plugin getPlugin() {
         return mPlugin;
+    }
+
+    @Override
+    public IItemMenu getParent() {
+        return mParentMenu;
     }
 }
