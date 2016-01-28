@@ -51,7 +51,7 @@ public class ConfigurableItem implements IMenuItem {
     }
 
     @Override
-    public boolean canPickUp(Player player) {
+    public boolean canPickUp() {
         return false;
     }
 
@@ -76,7 +76,7 @@ public class ConfigurableItem implements IMenuItem {
     }
 
     @Override
-    public ItemStack getIcon(Player player) {
+    public ItemStack getIcon() {
         return icon;
     }
 

@@ -39,7 +39,7 @@ public class PlainItem implements IMenuItem {
     }
 
     @Override
-    public boolean canPickUp(Player player) {
+    public boolean canPickUp() {
         return false;
     }
 
@@ -64,7 +64,7 @@ public class PlainItem implements IMenuItem {
     }
 
     @Override
-    public ItemStack getIcon(Player player) {
+    public ItemStack getIcon() {
         ItemMeta meta = icon.getItemMeta();
         if (!displayName.equals("")) meta.setDisplayName(displayName);
         meta.setLore(lore);

@@ -14,7 +14,7 @@ public interface IMenuItem {
 
     void onItemClick(ItemClickEvent event);
 
-    boolean canPickUp(Player player);
+    boolean canPickUp();
 
     boolean canBeReplaced();
 
@@ -32,7 +32,7 @@ public interface IMenuItem {
      */
     String getRawDisplayName();
 
-    ItemStack getIcon(Player player);
+    ItemStack getIcon();
 
     List<String> getLore();
 

@@ -34,7 +34,7 @@ public abstract class StaticItem implements IMenuItem {
     }
 
     @Override
-    public boolean canPickUp(Player player) {
+    public boolean canPickUp() {
         return false;
     }
 
@@ -60,7 +60,7 @@ public abstract class StaticItem implements IMenuItem {
     }
 
     @Override
-    public ItemStack getIcon(Player player) {
+    public ItemStack getIcon() {
         ItemMeta meta = mIcon.getItemMeta();
         if (mDisplayName != null) {
             meta.setDisplayName(mDisplayName);
