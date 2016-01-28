@@ -17,7 +17,7 @@ import java.util.List;
 public class CloseItem extends StaticItem {
 
     public CloseItem(IItemMenu menu, String displayName, ItemStack icon, String... lore) {
-        super(menu, icon, displayName, Arrays.asList(lore));
+        super(menu, icon, displayName, lore);
     }
 
     @Override

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,13 +19,13 @@ public abstract class StaticItem implements IMenuItem {
     protected IItemMenu mMenu;
     protected ItemStack mIcon;
     protected String mDisplayName;
-    protected List<String> mLore;
+    protected List<String> mLore = new ArrayList<>(0);
 
-    public StaticItem(IItemMenu menu, ItemStack icon, String displayName, List<String> lore) {
+    public StaticItem(IItemMenu menu, ItemStack icon, String displayName, String... lore) {
         mMenu = menu;
         mIcon = icon;
         mDisplayName = displayName;
-        mLore = lore;
+        if (lore != null) mLore.addAll(Arrays.asList(lore));
     }
 
     @Override

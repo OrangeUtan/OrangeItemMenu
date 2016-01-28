@@ -16,7 +16,7 @@ import java.util.List;
 public class EmptySlotItem extends StaticItem {
 
     public EmptySlotItem(IItemMenu menu, DyeColor color) {
-        super(menu, new ItemStack(Material.STAINED_GLASS_PANE, 1, color.getData()), " ", null);
+        super(menu, new ItemStack(Material.STAINED_GLASS_PANE, 1, color.getData()), " ");
     }
 
     @Override

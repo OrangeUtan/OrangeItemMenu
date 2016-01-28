@@ -19,7 +19,7 @@ public class NavigateItem extends StaticItem {
     protected IItemMenu mDestination;
 
     public NavigateItem(IItemMenu menu, String displayName, IItemMenu destination, String... lore) {
-        super(menu, null, displayName, Arrays.asList(lore));
+        super(menu, null, displayName, lore);
         this.mDestination = destination;
 
         if (destination == null) {
@@ -30,7 +30,7 @@ public class NavigateItem extends StaticItem {
     }
 
     public NavigateItem(IItemMenu menu, String displayName, ItemStack icon, IItemMenu destination, String... lore) {
-        super(menu, icon, displayName, Arrays.asList(lore));
+        super(menu, icon, displayName, lore);
         this.mDestination = destination;
     }
 
