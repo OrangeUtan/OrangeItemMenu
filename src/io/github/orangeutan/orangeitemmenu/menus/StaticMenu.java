@@ -116,6 +116,7 @@ public abstract class StaticMenu implements IItemMenu {
     public void resume(IItemMenu oldMenu) {
         updateContent();
         syncInventory();
+        open(oldMenu);
     }
 
     @Override
