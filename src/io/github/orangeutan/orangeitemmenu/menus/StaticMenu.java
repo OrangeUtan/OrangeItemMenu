@@ -95,9 +95,9 @@ public abstract class StaticMenu implements IItemMenu {
     }
 
     @Override
-    public void navigateBack(Player player) {
+    public void navigateBack() {
         if (mParentMenu != null) {
-            final Player p = player;
+            final Player p = mPlayer;
             Bukkit.getScheduler().scheduleSyncDelayedTask(mPlugin, new Runnable() {
                 @Override
                 public void run() {

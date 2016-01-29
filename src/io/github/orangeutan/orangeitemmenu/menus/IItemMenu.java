@@ -47,7 +47,7 @@ public interface IItemMenu {
 
     void clear(Player player);
 
-    void navigateBack(Player player);
+    void navigateBack();
 
     void resume(Player player, IItemMenu oldMenu);
 
