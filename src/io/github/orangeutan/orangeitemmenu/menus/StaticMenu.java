@@ -59,16 +59,16 @@ public abstract class StaticMenu implements IItemMenu {
     @Override
     public void open(IItemMenu previousMenu) {
         Inventory inventory = Bukkit.createInventory(new MenuHolder(this, Bukkit.createInventory(mPlayer, mSize.getSlots())), mSize.getSlots(), mName);
-        applyOnInventory(inventory, mPlayer);
+        applyOnInventory(inventory);
 
         mPlayer.openInventory(inventory);
     }
 
     @Override
-    public void close(Player player) {
-        if (player.getOpenInventory() != null) {
-            if (player.getOpenInventory().getTopInventory().getHolder() instanceof MenuHolder) {
-                final Player p = player;
+    public void close() {
+        if (mPlayer.getOpenInventory() != null) {
+            if (mPlayer.getOpenInventory().getTopInventory().getHolder() instanceof MenuHolder) {
+                final Player p = mPlayer;
                 Bukkit.getScheduler().scheduleSyncDelayedTask(mPlugin, new Runnable() {
                     public void run() {
                         p.closeInventory();
@@ -79,24 +79,19 @@ public abstract class StaticMenu implements IItemMenu {
     }
 
     @Override
-    public void update(Player player) {
-        if (player.getOpenInventory() != null) {
-            Inventory inventory = player.getOpenInventory().getTopInventory();
+    public void update() {
+        if (mPlayer.getOpenInventory() != null) {
+            Inventory inventory = mPlayer.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
                 inventory.clear();
-                applyOnInventory(inventory, player);
-                player.updateInventory();
+                applyOnInventory(inventory);
+                mPlayer.updateInventory();
             }
         }
     }
 
     @Override
-    public void updateContent() {
-        // Content doesn't change
-    }
-
-    @Override
-    public void clear(Player player) {
+    public void clear() {
     }
 
     @Override
@@ -106,19 +101,19 @@ public abstract class StaticMenu implements IItemMenu {
             Bukkit.getScheduler().scheduleSyncDelayedTask(mPlugin, new Runnable() {
                 @Override
                 public void run() {
-                    if (p != null) mParentMenu.resume(p, StaticMenu.this);
+                    if (p != null) mParentMenu.resume(StaticMenu.this);
                 }
             }, 3);
         }
     }
 
     @Override
-    public void resume(Player player, IItemMenu oldMenu) {
+    public void resume(IItemMenu oldMenu) {
         open(oldMenu);
     }
 
     @Override
-    public void applyOnInventory(Inventory inventory, Player player) {
+    public void applyOnInventory(Inventory inventory) {
         for (int i = 0; i < mItems.size(); i++) {
             if (i >= mItems.size()) break;
             if (mItems.get(i) != null && inventory.getItem(i) == null) {

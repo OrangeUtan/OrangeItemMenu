@@ -28,32 +28,27 @@ public interface IItemMenu {
 
     /**
      * Open the Inventory GUI for a Player
-     * @param player The {@link Player} for which to open the Inventory GUI Menu
      * @param previousMenu The previous {@link IItemMenu} opening this Inventory GUI Menu
      */
     void open(IItemMenu previousMenu);
 
     /**
      * Close this Inventory GUI Menu
-     * @param player The {@link Player} for which to close the Inventory GUI Menu
      */
-    void close(Player player);
+    void close();
 
     /**
      * Update the Inventory GUI Menu for a Player
-     * @param player The {@link Player} for which to update the Inventory GUI Menu
      */
-    void update(Player player);
+    void update();
 
-    void updateContent();
-
-    void clear(Player player);
+    void clear();
 
     void navigateBack();
 
-    void resume(Player player, IItemMenu oldMenu);
+    void resume(IItemMenu oldMenu);
 
-    void applyOnInventory(Inventory inventory, Player player);
+    void applyOnInventory(Inventory inventory);
 
     IItemMenu fillEmptySlots(DyeColor color);
 
