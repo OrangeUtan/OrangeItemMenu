@@ -45,6 +45,8 @@ public interface IItemMenu {
      */
     void update(Player player);
 
+    void updateContent();
+
     void clear(Player player);
 
     void navigateBack();

@@ -91,6 +91,11 @@ public abstract class StaticMenu implements IItemMenu {
     }
 
     @Override
+    public void updateContent() {
+        // Content doesn't change
+    }
+
+    @Override
     public void clear(Player player) {
     }
 
