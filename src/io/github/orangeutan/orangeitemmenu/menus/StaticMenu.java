@@ -14,7 +14,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * {@link IItemMenu} that doesn't change for any Player ({@link IMenuItem}s may still change their Icons)
@@ -79,7 +78,7 @@ public abstract class StaticMenu implements IItemMenu {
     }
 
     @Override
-    public void update() {
+    public void syncInventory() {
         if (mPlayer.getOpenInventory() != null) {
             Inventory inventory = mPlayer.getOpenInventory().getTopInventory();
             if (inventory.getHolder() instanceof MenuHolder && ((MenuHolder) inventory.getHolder()).getMenu().equals(this)) {
@@ -91,7 +90,13 @@ public abstract class StaticMenu implements IItemMenu {
     }
 
     @Override
+    public void updateContent() {
+        // Content doesn't change
+    }
+
+    @Override
     public void clear() {
+        // Do nothing
     }
 
     @Override
@@ -109,7 +114,7 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public void resume(IItemMenu oldMenu) {
-        update();
+        syncInventory();
     }
 
     @Override

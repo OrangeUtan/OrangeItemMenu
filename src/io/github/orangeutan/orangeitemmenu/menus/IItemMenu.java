@@ -38,9 +38,14 @@ public interface IItemMenu {
     void close();
 
     /**
-     * Update the Inventory GUI Menu for a Player
+     * Synchronise the Content of the Inventory with the Items of this Menu
      */
-    void update();
+    void syncInventory();
+
+    /**
+     * Update the Items of this Menu to Changes in the Server/Plugin/etc.
+     */
+    void updateContent();
 
     void clear();
 

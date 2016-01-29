@@ -5,7 +5,6 @@ import io.github.orangeutan.orangeitemmenu.menus.IItemMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class ConfigurableItem implements IMenuItem {
                 isEmpty = true;
                 break;
         }
-        menu.update(getMenu().getPlayer());
+        menu.syncInventory(getMenu().getPlayer());
     }
 
     @Override
