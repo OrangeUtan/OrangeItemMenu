@@ -109,7 +109,7 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public void resume(IItemMenu oldMenu) {
-        open(oldMenu);
+        update();
     }
 
     @Override
