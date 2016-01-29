@@ -132,6 +132,7 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public IItemMenu fillEmptySlots(DyeColor color) {
+        // Ensure that ArrayList has as many Items as the Number of Slots of the Inventory
         while (mItems.size() < mSize.getSlots()) {
             mItems.add(new EmptySlotItem(this, color));
         }
@@ -174,7 +175,13 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public IItemMenu setItem(int index, IMenuItem item) {
-        if (index >= mItems.size()) return null;
+        // Check if index is bigger than the Size of the ArrayList of Items
+        if (index >= mItems.size()) {
+            // Index can't be bigger than the Number of Slots
+            if (index >= mSize.getSlots()) return null;
+            // If the Index is in the Range of the Number of Slots, but the Array is smaller, fill the Array before setting the Item
+            fillEmptySlots(DyeColor.GRAY);
+        }
         mItems.set(index, item);
         return this;
     }
