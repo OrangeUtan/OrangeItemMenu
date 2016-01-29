@@ -24,6 +24,6 @@ public class CloseItem extends StaticItem {
     public void onItemClick(ItemClickEvent event) {
         super.onItemClick(event);
 
-        mMenu.close(getMenu().getPlayer());
+        mMenu.close();
     }
 }
