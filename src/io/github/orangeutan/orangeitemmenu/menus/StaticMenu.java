@@ -96,7 +96,8 @@ public abstract class StaticMenu implements IItemMenu {
 
     @Override
     public void clear() {
-        // Do nothing
+        // Clear all Items
+        mItems.clear();
     }
 
     @Override
